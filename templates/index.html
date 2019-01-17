@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container mt-5 col-8">
+
+</div>
+<div class="container mt-5">
+
+    <h3 class="">What's the heath of the job market?</h3>
+    <p>Top economic sectors for each U.S. State</p>
+
+    {% if the_div %}     {{ the_div|safe }} {% endif %}
+</div>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-1.0.2.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.2.min.js"></script>
+{% if the_script %}     {{ the_script|safe }} {% endif %}
+
+{% endblock %}
