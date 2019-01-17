@@ -73,7 +73,7 @@ def createUSMap():
                                           //window.location.href = link; \
                                    " )
 
-       hover.js_on_event('tap', press_state)
+       p.js_on_event('tap', press_state)
 
 
 
