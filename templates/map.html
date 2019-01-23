@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section class="my-5">
+        <div class="container">
+                {% if the_div %}     {{ the_div|safe }} {% endif %}
+            </div>
+            <script src="http://cdn.pydata.org/bokeh/release/bokeh-1.0.2.min.js"></script>
+            <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.2.min.js"></script>
+            {% if the_script %}     {{ the_script|safe }} {% endif %}
+        </div>
+</section>
+
+{% endblock %}
