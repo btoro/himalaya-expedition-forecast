@@ -1,28 +1,46 @@
 ### Plots for peak 
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+from bokeh.models import Range1d
 from bokeh.plotting import figure
+from data import getPeaks, getMembers
 
-def visits_over_time():
+
+df_peaks = getPeaks()
+df_members = getMembers()
+
+def plot_visits_month_peak( peak ):
+    
+    visits = df_members[ df_members['PEAKID'] == peak ]
+    
+    return visits.groupby(['MYEAR'])['FNAME'].count()
+    
+
+    
+def visits_over_time( peak ):
 
 
-    data = []
+    data = plot_visits_month_peak( peak )
 
         
+    title = 'Visits over time'
 
-    # output to static HTML file
-    output_file("stocks.html", title="stocks.py example")
+    p = figure(title=title, tools='', background_fill_color="#fafafa" , width=1000, height=300)
 
-    # create a new plot with a a datetime axis type
-    p = figure(width=800, height=350, x_axis_type="datetime")
+    p.vbar(x= data.index, top=data.values, width=0.9)
 
-    # add renderers
-    p.circle(aapl_dates, aapl, size=4, color='darkgrey', alpha=0.2, legend='close')
-    p.line(aapl_dates, aapl_avg, color='navy', legend='avg')
 
-    # NEW: customize by setting attributes
-    p.title.text = "AAPL One-Month Average"
-    p.legend.location = "top_left"
-    p.grid.grid_line_alpha=0
-    p.xaxis.axis_label = 'Date'
-    p.yaxis.axis_label = 'Price'
-    p.ygrid.band_fill_color="olive"
-    p.ygrid.band_fill_alpha = 0.1
+    # p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],
+    #        fill_color="navy", line_color="white", alpha=0.5)
+
+    interval = 0.1*data.values.max()
+    p.y_range = Range1d(0, data.values.max()+interval, bounds=(0,  data.values.max()+interval))
+    # p.y_range.start = 0
+    # p.legend.location = "center_right"
+    # p.legend.background_fill_color = "#fefefe"
+    p.xaxis.axis_label = 'Year'
+    p.yaxis.axis_label = 'Visits'
+    p.grid.grid_line_color="white"
+    return p
