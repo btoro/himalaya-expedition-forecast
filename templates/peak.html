@@ -3,7 +3,7 @@
 
 <div class="container my-5 ">
     <div class="row mb-2">
-        <h1>Everest</h1>
+        <h2> {{ info.name[0] }} </h2>
     </div>
     <div class="row">
         <div class="col-4">
@@ -12,9 +12,9 @@
                     <h5 class="card-title">Mountain statistics</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Height 1000m</li>
-                    <li class="list-group-item">Rank in Himalayahs 1</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item">Height {{ info.height[0] }}m</li>
+                    <li class="list-group-item">Rank in Himalayahs 4</li>
+                    <!-- <li class="list-group-item">Vestibulum at eros</li> -->
                 </ul>
             </div>
         </div>

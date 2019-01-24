@@ -15,7 +15,7 @@ from graphs_maps import createUSMap
 
 from data import getPeaks
 from models import predict_one_peak
-from peaks import visits_over_time
+from peaks import visits_over_time, get_peak_info
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -74,8 +74,10 @@ def peak( peakid ):
     plot = visits_over_time(peakid )
     script, div = components(plot)
 
+    info = get_peak_info( peakid )
 
-    return render_template('peak.html', the_div_1=div, the_script_1=script)
+
+    return render_template('peak.html', the_div_1=div, the_script_1=script, info=info)
 
 # @app.route('/map', methods=['get'])
 # def map():

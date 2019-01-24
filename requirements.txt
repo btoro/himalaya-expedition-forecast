@@ -8,3 +8,4 @@ WTForms==2.2.1
 bokeh==1.0.2
 Flask_WTF==0.14.2
 scikit_learn==0.20.2
+gunicorn==19.9.0

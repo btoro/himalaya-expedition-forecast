@@ -44,3 +44,9 @@ def visits_over_time( peak ):
     p.yaxis.axis_label = 'Visits'
     p.grid.grid_line_color="white"
     return p
+
+def get_peak_info( peakid ):
+
+    return {'name': df_peaks[df_peaks.PEAKID == peakid]['PKNAME'].values, \
+            'height': df_peaks[df_peaks.PEAKID == peakid]['HEIGHTM'].values
+                     }
