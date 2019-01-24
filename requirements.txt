@@ -1,0 +1,10 @@
+Flask==1.0.2
+pandas==0.23.4
+matplotlib==3.0.2
+numpy==1.15.4
+requests==2.21.0
+dill==0.2.8.2
+WTForms==2.2.1
+bokeh==1.0.2
+Flask_WTF==0.14.2
+scikit_learn==0.20.2
