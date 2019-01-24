@@ -77,12 +77,12 @@ def peak( peakid ):
 
     return render_template('peak.html', the_div_1=div, the_script_1=script)
 
-@app.route('/map', methods=['get'])
-def map():
-    plot = createUSMap()
-    script, div = components(plot)
+# @app.route('/map', methods=['get'])
+# def map():
+#     plot = createUSMap()
+#     script, div = components(plot)
 
-    return render_template('map.html', the_div=div, the_script=script)
+#     return render_template('map.html', the_div=div, the_script=script)
 
 
 if __name__ == '__main__':
