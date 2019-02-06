@@ -43,6 +43,10 @@ def visits_over_time( peak ):
     p.xaxis.axis_label = 'Year'
     p.yaxis.axis_label = 'Visits'
     p.grid.grid_line_color="white"
+
+    p.background_fill_alpha = 0.0
+    p.border_fill_alpha = 0.0
+
     return p
 
 def get_peak_info( peakid ):

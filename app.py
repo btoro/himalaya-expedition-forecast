@@ -79,6 +79,27 @@ def peak( peakid ):
 
     return render_template('peak.html', the_div_1=div, the_script_1=script, info=info)
 
+@app.route('/background', methods=['get'])
+def background(  ):
+    return render_template('background.html')
+
+@app.route('/mountains', methods=['get'])
+def mountains(  ):
+    return render_template('mountains.html')
+
+
+
+@app.route('/slides', methods=['get'])
+def slides(  ):
+
+    plot = visits_over_time( 'EVER' )
+    s1_1, d1_1 = components(plot)
+
+
+
+    return render_template('slides.html', d1_1=d1_1, s1_1=s1_1 )
+
+
 # @app.route('/map', methods=['get'])
 # def map():
 #     plot = createUSMap()

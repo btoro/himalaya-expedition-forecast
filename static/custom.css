@@ -58,3 +58,8 @@ header {
   .card_container {
     background-color: var(--sec-bg-color);
   }
+
+  .vh-100 {
+    min-height: 90vh;
+
+}
