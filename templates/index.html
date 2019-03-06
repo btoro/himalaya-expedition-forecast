@@ -21,71 +21,32 @@
             <div class="progress">
                 <div class="progress-bar {% if results == 1 %} bg-success {% else %} bg-danger {% endif %}" role="progressbar" style="width: {{prob}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-
+            <p><small>Disclaimer: Predictions can be unreliable and should be not be used as the sole determinant in attempting any climb.</small></p>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% if s %}
+<section class="my-5">
+    <div class="container">
+        <div class="col-md-8 mx-auto p-3 card_container rounded" align='center'>
+            {% if d %}     {{ d|safe }} {% endif %}
+            {% if s %}     {{ s|safe }} {% endif %}
         </div>
     </div>
 </section>
 {% endif %}
 <section class="my-5">
         <div class="container">
-            <div class="col-md-8 mx-auto p-3 card_container rounded">
-                <form method="POST" action="/">
-                    {{ form_onepeak.csrf_token }}
-                    <h4> {{ form_onepeak.peak.label }} </h4>
+            <div class="row justify-content-md-center">
 
-                    <div class="form-group row">
-                        <div class="col-sm-8">
-                            {{ form_onepeak.peak(class="form-control") }}
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="submit" class="btn btn-primary">Learn more</button>
-                        </div>
-                    </div>
-                    <hr>
-                    <h4>Climber details:</h4>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label"><strong>{{ form_onepeak.age.label }}</strong>  </label>
-                        <div class="col-sm-3">
-                            {{ form_onepeak.age(class="form-control") }}
-                        </div>
-                        <label for="" class="col-sm-4 col-form-label"><strong>{{ form_onepeak.useoxygen.label }}</strong>  </label>
-                        <div class="col-sm-3">
-                            {{ form_onepeak.useoxygen(class="form-check-input") }}
-                        </div>
-                    </div>
-                    <hr/>
-                    <h4>Expedition history</h4>
-                    <h5>Have you participated in expeditions over ... ?</h5>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-4 col-form-label"><strong>{{ form_onepeak.exp_over_4000.label }} </strong> </label>
-                        <div class="col-sm-2">
-                            {{ form_onepeak.exp_over_4000(class="form-control") }}
-                        </div>
-                        <label for="" class="col-sm-4 col-form-label"><strong>{{ form_onepeak.exp_over_6000.label }}</strong>  </label>
-                        <div class="col-sm-2">
-                            {{ form_onepeak.exp_over_6000(class="form-control") }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-4 col-form-label"><strong>{{ form_onepeak.exp_over_7000.label }} </strong> </label>
-                        <div class="col-sm-2">
-                            {{ form_onepeak.exp_over_7000(class="form-control") }}
-                        </div>
-                        <label for="" class="col-sm-4 col-form-label"><strong>{{ form_onepeak.exp_over_8000.label }}</strong>  </label>
-                        <div class="col-sm-2">
-                            {{ form_onepeak.exp_over_8000(class="form-control") }}
-                        </div>
-                    </div>
-                    <hr/>
-                    <div class="form-group row">
-                        <div class="col-sm-1"></div>
-                        <div class="col-sm-10">
-    
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Predict</button>
-                        </div>
-                    </div>
-                </form>
+                <div class="col-md-8 mx-5 p-3 card_container rounded">
+                        {% include 'slides/prediction_form.html' %}  
+
+                </div>
+
             </div>
+
         </div>
 </section>
 

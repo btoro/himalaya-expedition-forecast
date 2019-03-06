@@ -1,4 +1,28 @@
 <div id="content" class="container my-5 ">
-        <h1>Production Model</h1>
+    <h1>Production Model</h1>
+    <div class="container" >
+        <div class="row py-5">
+            <div class="col-5">
+                <h2>Confusion Matrix</h2>
+                <p class='slidetext'>Optimized model with GridSearchCV (CV =5)</p>
+                <p class='slidetext'>Set aside 10% of data for testing</p>
+                <img src="/static/confusionmatrix_capstone.png" alt="..." width=85%  >
 
+            </div>
+            <div class="col-7">
+                <h2>Feature importances</h2>
+                <p class='slidetext'>Which features had the most influence on the model?</p>
+                <div>
+
+                    {% if d4_2 %}     {{ d4_2|safe }} {% endif %}
+                    {% if s4_2 %}     {{ s4_2|safe }} {% endif %}
+                </div>
+            </div>
+        </div>
+        <div align='center'>        
+            <a href="/">
+                <button type="button" class="btn btn-primary btn-lg">Go to model</button>
+            </a>
+        </div>
+    </div>
 </div>

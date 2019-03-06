@@ -11,10 +11,10 @@ from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.models.sources import ColumnDataSource
 
-from graphs_maps import createUSMap
 
 from data import getPeaks
-from models import predict_one_peak
+from models import predict_one_peak, getConfusionMatrix, getFeatureImportances, getModelSelectionFigure
+from models import makePredictions
 from peaks import visits_over_time, get_peak_info
 
 app = Flask(__name__)
@@ -25,36 +25,62 @@ df_peaks = getPeaks()
 
 peakList = list(zip(df_peaks.PEAKID, df_peaks.PKNAME))
 
-class OnePeakPredict_Form(Form):
+
+
+class prediction_from( Form ):
+
     peak  = SelectField(u'Select Peak', choices=peakList )
+    peakHeight = IntegerField('Peak Height (m)' )
 
-    age    = IntegerField('Age', [validators.NumberRange(min=18, max=100), validators.required()])
+    predictType = RadioField('Prediction type', choices=[('1', 'Single Himalayan Peak'), ('2', 'Custom Peak'), ('3', 'All Himalayan peaks')])
 
+    age    = IntegerField('Age', [validators.NumberRange(min=18, max=100), validators.DataRequired()])
+    
     useoxygen = BooleanField( 'Plan to use O2?' )
 
-    exp_over_6000    = IntegerField('6000 meters', [validators.NumberRange(min=0, max=1000)] , default=0)
-    exp_over_7000    = IntegerField('7000 meters', [validators.NumberRange(min=0, max=1000)], default=0)
-    exp_over_8000    = IntegerField('8000 meters', [validators.NumberRange(min=0, max=1000)], default=0)
-    exp_over_4000    = IntegerField('4000 meters', [validators.NumberRange(min=0, max=1000)], default=0)
+    season  = SelectField(u'Select Season', choices= [('1', 'Spring'), ('2', 'Summer'), ('3', 'Fall'), ('4', 'Winter')] )
+    maxPersonalHeight = IntegerField('Personal Max Height (m)', [validators.NumberRange(min=0, max=8840), validators.InputRequired()])
 
+    past_exped = IntegerField('Past Expedition Count', [validators.NumberRange(min=0, max=200), validators.InputRequired()])
 
 
 @app.route('/', methods=['get', 'post'])
 def index():
-    form_onepeak = OnePeakPredict_Form( request.form )
+    form_onepeak = prediction_from( request.form )
+    radio = list(form_onepeak.predictType)
 
     if request.method == 'GET':
-        return render_template('index.html', form_onepeak=form_onepeak )
+        return render_template('index.html', form_onepeak=form_onepeak , radio=radio)
 
     elif  request.method == 'POST' and form_onepeak.validate():
 
-        results, prob = predict_one_peak( form_onepeak.peak.data, form_onepeak.age.data, form_onepeak.useoxygen.data, form_onepeak.exp_over_4000.data )
-        return render_template('index.html', form_onepeak=form_onepeak, results=results, prob= round( prob[0][1]*100, 0 ) )
+        kind = int(form_onepeak.predictType.data)
+
+        if kind == 1:
+            p = form_onepeak.peak.data
+        elif kind == 2:
+            p = form_onepeak.peakHeight.data
+        elif kind == 3:
+            p = ''
+
+        if kind  == 3:
+            _, _, p = makePredictions( kind, p, form_onepeak.age.data , form_onepeak.useoxygen.data, int(form_onepeak.season.data) , form_onepeak.maxPersonalHeight.data, form_onepeak.past_exped.data )
+            s, d = components(p)
+            return render_template('index.html', form_onepeak=form_onepeak , radio=radio, s=s, d=d )
+
+        else:
+            results, prob, _ = makePredictions( kind, p, form_onepeak.age.data , form_onepeak.useoxygen.data, int(form_onepeak.season.data) , form_onepeak.maxPersonalHeight.data, form_onepeak.past_exped.data )
+        
+        
+            return render_template('index.html', form_onepeak=form_onepeak , radio=radio, results=results, prob= round( prob[0][1]*100, 0 ))
+
+        # results, prob = predict_one_peak( form_onepeak.peak.data, form_onepeak.age.data, form_onepeak.useoxygen.data, form_onepeak.exp_over_4000.data )
+        # return render_template('index.html', form_onepeak=form_onepeak, results=results, prob= round( prob[0][1]*100, 0 ) )
 
     else:
         print('validation failed?')
         print( form_onepeak.errors )
-        return render_template('index.html', form_onepeak=form_onepeak )
+        return render_template('index.html', form_onepeak=form_onepeak  , radio=radio)
 
 
 
@@ -95,17 +121,22 @@ def slides(  ):
     plot = visits_over_time( 'EVER' )
     s1_1, d1_1 = components(plot)
 
+    plot = getModelSelectionFigure()
+    s3_1, d3_1 = components(plot)
+
+    # plot = getConfusionMatrix()
+    # s4_1, d4_1 = components(plot)
+
+    plot = getFeatureImportances()
+    s4_2, d4_2 = components(plot)
 
 
-    return render_template('slides.html', d1_1=d1_1, s1_1=s1_1 )
+    
 
+    return render_template('slides.html',   d1_1=d1_1, s1_1=s1_1 ,
+                                            d3_1=d3_1, s3_1=s3_1 ,
+                                            d4_2=d4_2, s4_2=s4_2  )
 
-# @app.route('/map', methods=['get'])
-# def map():
-#     plot = createUSMap()
-#     script, div = components(plot)
-
-#     return render_template('map.html', the_div=div, the_script=script)
 
 
 if __name__ == '__main__':

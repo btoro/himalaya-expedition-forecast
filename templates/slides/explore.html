@@ -1,4 +1,24 @@
 <div id="content" class="container my-5 ">
-        <h1>Exploratory Analysis</h1>
+        <div class="row pt-1">
 
+            <h1>Exploratory Analysis</h1>
+        </div>
+        <div class="row pt-2">
+            <h5>Climbing attempts per year</h5>
+            <div class="container" align='center'>
+
+                {% if d1_1 %}     {{ d1_1|safe }} {% endif %}
+                {% if s1_1 %}     {{ s1_1|safe }} {% endif %}
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-6">
+                <h5>Total expedition count and outcome</h5>
+                <img src="/static/peaks_vs_attempts.png" alt="..." width=100% >
+            </div>
+            <div class="col-6">
+                <h5>Most experienced climbers</h5>
+                <img src="/static/climber_exped.png" alt="..." width=100% >
+            </div>
+        </div>
 </div>

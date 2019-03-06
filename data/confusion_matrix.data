@@ -1,0 +1,5 @@
+Treatment,Prediction,value
+Fail,Fail,12403
+Fail,Succeed,2820
+Succeed,Fail,370
+Succeed,Succeed,8507

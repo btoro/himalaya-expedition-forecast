@@ -1,0 +1,83 @@
+<form method="POST" action="/">
+    {{ form_onepeak.csrf_token }}
+    <h5> Goal(s):</h5>
+
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <div class="form-check">
+                    {{ radio[0](class="form-check-input") }}
+                    <label class="form-check-label" for="gridRadios1">
+                        <strong>{{ radio[0].label }}</strong>                 
+                    </label>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            {{ form_onepeak.peak(class="form-control") }}
+        </div>
+    </div>
+    <!-- <div class="form-group row">
+        <div class="col-sm-4">
+            <div class="form-check">
+                    {{ radio[1](class="form-check-input") }}
+                    <label class="form-check-label" for="gridRadios1">
+                        <strong>{{ radio[1].label }}</strong>                 
+                    </label>
+            </div>
+        </div>
+        <label for="" class="col-sm-4 col-form-label"><strong>{{ form_onepeak.peakHeight.label }}</strong>  </label>
+        <div class="col-sm-3">
+            {{ form_onepeak.peakHeight(class="form-control") }}
+        </div>
+    </div> -->
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <div class="form-check">
+                {{ radio[2](class="form-check-input") }}
+                <label class="form-check-label" for="gridRadios1">
+                    <strong>{{ radio[2].label }}</strong>                 
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <h5>Climber details:</h5>
+    <div class="form-group row">
+        <label for="" class="col-sm-1 col-form-label"><strong>{{ form_onepeak.age.label }}</strong>  </label>
+        <div class="col-sm-2">
+            {{ form_onepeak.age(class="form-control") }}
+        </div>
+        <label for="" class="col-sm-3 col-form-label"><strong>{{ form_onepeak.useoxygen.label }}</strong>  </label>
+        <div class="col-sm-1">
+            <div class="form-check">
+                {{ form_onepeak.useoxygen(class="form-check-input") }}
+            </div>
+        </div>
+        <label for="" class="col-sm-3 col-form-label"><strong>{{ form_onepeak.season.label }}</strong>  </label>
+        <div class="col-sm-2">
+                {{ form_onepeak.season(class="form-control") }}
+        </div>
+    </div>
+    <!-- <h4>Expedition history</h4>
+    <h5>Have you participated in expeditions over ... ?</h5> -->
+    <div class="form-group row">
+        <label for="" class="col-sm-4 col-form-label"><strong>{{ form_onepeak.maxPersonalHeight.label }} </strong> </label>
+        <div class="col-sm-2">
+            {{ form_onepeak.maxPersonalHeight(class="form-control") }}
+        </div>
+        <label for="" class="col-sm-4 col-form-label"><strong>{{ form_onepeak.past_exped.label }}</strong>  </label>
+        <div class="col-sm-2">
+            {{ form_onepeak.past_exped(class="form-control") }}
+        </div>
+    </div>
+ 
+    <hr/>
+    <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Predict</button>
+        </div>
+    </div>
+
+</form>

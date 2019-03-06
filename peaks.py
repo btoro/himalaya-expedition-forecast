@@ -25,9 +25,10 @@ def visits_over_time( peak ):
     data = plot_visits_month_peak( peak )
 
         
-    title = 'Visits over time'
+    # title = 'Visits over time'
+    TOOLS = "hover,save,reset"
 
-    p = figure(title=title, tools='', background_fill_color="#fafafa" , width=1000, height=300)
+    p = figure(  tools=TOOLS, background_fill_color="#fafafa" , width=1000, height=300)
 
     p.vbar(x= data.index, top=data.values, width=0.9)
 
@@ -41,12 +42,17 @@ def visits_over_time( peak ):
     # p.legend.location = "center_right"
     # p.legend.background_fill_color = "#fefefe"
     p.xaxis.axis_label = 'Year'
-    p.yaxis.axis_label = 'Visits'
+    p.yaxis.axis_label = 'Climbers'
     p.grid.grid_line_color="white"
 
     p.background_fill_alpha = 0.0
     p.border_fill_alpha = 0.0
 
+    p.xaxis.major_label_text_font_size = "18pt"
+    p.yaxis.major_label_text_font_size = "18pt"
+
+    p.xaxis.axis_label_text_font_size = "20pt"
+    p.yaxis.axis_label_text_font_size = "20pt"
     return p
 
 def get_peak_info( peakid ):

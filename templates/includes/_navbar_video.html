@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
         <div class="navbar-header">
-          <a class="navbar-brand" href="../">Peak Success</a>
+          <!-- <a class="navbar-brand" href="../">Peak Success</a> -->
+          <i class="fas fa-mountain fa-4x text-primary"></i>
         </div>
     
       <div>
@@ -9,7 +10,7 @@
             <a class="nav-link" href="../">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link"  href="../background">Background</a>
+            <a class="nav-link"  href="../slides"><button class="btn btn-primary" type="button">Visual Abstract</button></a>
           </li>
           <li class="nav-item active">
             <a class="nav-link">The mountains</a>
@@ -17,22 +18,12 @@
           <li class="nav-item active">
             <a class="nav-link">Climber leaderboard</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Implementation
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/overview">Dataset Overview</a>
-              <a class="dropdown-item" href="#">Job Title Categorization</a>
-              <a class="dropdown-item" href="#">Model Selection</a>
-            </div>
-          </li>
-          <!-- <li class="nav-item ">
-              <a class="nav-link" href="#"><button class="btn btn-success" type="button">Production</button></a>
-            </li> -->
         </ul>
       </div>
     </nav>
+
+
+
 {%- if request.path == "/" %}
 <header>
     <div class="overlay"></div>
